@@ -9,7 +9,7 @@
     <meta name="description" content="Listen to the most popular music here!" />
     <meta name="author" content="BuildUp Project Spotify" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="/css/favicon-tv.png" />
+    <link rel="icon" type="image/x-icon" href="/spotify_project/css/favicon-tv.png" />
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/spotify_project/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
