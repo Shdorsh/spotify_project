@@ -51,16 +51,33 @@
                 $errors = true;
             };
 
-            if ($errors = false) {
-                $privateInfo = array();
+            if ($errors == false) {
                 $firstName = $_GET['firstName'];
                 $lastName = $_GET['lastName'];
                 $email = $_GET['email'];
                 $password = $_GET['password'];
-
                 echo "Welcome to our Music Database! Your first name is $firstName and your last name is $lastName. Your email is $email and password is equal to [$password].";
+                // $_SESSION['id'] = $_GET['email'];
+               
+
+                $conn = mysqli_connect('localhost', 'root', '', 'spotify_db');
+                if ($conn) {
+                    echo 'Connected successfully<br>';
+                    $query = "INSERT INTO users (username, email, password) 
+                VALUES ('$firstName $lastName', '$email', '$password')";
+                    $result = mysqli_query($conn, $query);
+                    if ($result) {
+                        echo 'Successfully inserted in the DB.';
+                    } else {
+                        echo 'Problem inserting.';
+                    }
+                }
+
+                if ($result)
+                    echo 'Successfully inserted in the DB.';
             }
-        };
+        }
+
 
         ?>
     </div>
