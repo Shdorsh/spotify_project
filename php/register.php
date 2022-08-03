@@ -18,7 +18,7 @@
 </head>
 
 <body id="body">
-<form action="">
+    <form action="">
         <input type="text" name="firstName" placeholder="Type your first name">
         <input type="text" name="lastName" placeholder="Type your last name">
         <input type="text" name="email" placeholder="Type your email address">
@@ -39,17 +39,19 @@
         if (isset($_GET['submit'])) {
             $errors = false;
             if (strlen($_GET['email']) > 50 || strlen($_GET['email']) < 8) {
-                echo "Email must be at maximum 50 characters long and at least 8 characters long!";};
+                echo "Email must be at maximum 50 characters long and at least 8 characters long!";
+                $errors = true;
+            };
             if (empty($_GET['firstName']) || empty($_GET['lastName'])) {
                 echo 'First name and last name are mandatory !';
                 $errors = true;
             };
-            if ((strlen($_GET['password']) < 8) || (strlen($_GET['confirmation']) < 8) || ($_GET['password']) !== ($_GET['confirmation'])){
+            if ((strlen($_GET['password']) < 8) || (strlen($_GET['confirmation']) < 8) || ($_GET['password']) !== ($_GET['confirmation'])) {
                 echo 'The fields "Password" and "Confirmation" must be identical and have at least 8 characters!';
                 $errors = true;
             };
-            
-            if (strlen($_GET['email']) < 50 && strlen($_GET['email']) > 8 && (isset($_GET['firstName']) && isset($_GET['lastName'])) && (strlen($_GET['password']) > 8) && (strlen($_GET['confirmation']) > 8) && ($_GET['password']) === ($_GET['confirmation'])) {
+
+            if ($errors = false) {
                 $privateInfo = array();
                 $firstName = $_GET['firstName'];
                 $lastName = $_GET['lastName'];
@@ -58,8 +60,8 @@
 
                 echo "Welcome to our Music Database! Your first name is $firstName and your last name is $lastName. Your email is $email and password is equal to [$password].";
             }
-            };
-        
+        };
+
         ?>
     </div>
 
