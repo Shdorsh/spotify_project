@@ -1,0 +1,8 @@
+body {
+  background-image: url(/spotify_project/css/17.jpg);
+  background-size: cover;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin: 100px;
+}
