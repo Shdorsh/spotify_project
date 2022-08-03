@@ -16,21 +16,22 @@
         $returnData = array();
 
         foreach($fetchAll as $value) {
+            // If a certain $value['name'] entry is already in the database, only update some values and go to the next $fetchAll entry
+            if(isset($returnData[$value['name']])) {
+                $returnData[$value['name']]['songsnum']++;
+                $returnData[$value['name']]['genre'][] = $value['title'];
+                continue;
+            }
+
+            // Else, create a new entry in the database
             $returnData[$value['name']] = array();
             $returnData[$value['name']]['name'] = $value['name'];
             $returnData[$value['name']]['bio'] = substr($value['bio'],0,20);
-
-            // Adding a genre
             $returnData[$value['name']]['genre'][] = $value['title'];
+            $returnData[$value['name']]['songsnum'] = 1;
 
-            // BUGGED needs to increment by 1
-            if(isset($returnData[$value['name']]['songsnum'])) {
-                $returnData[$value['name']]['songsnum']++;
-            } else {
-                $returnData[$value['name']]['songsnum'] = 1;
-            }
         }
-
+        // Returns an array with all the rappers, and their genres
         return $returnData;
     }
 
