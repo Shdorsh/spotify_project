@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : mer. 03 août 2022 à 11:22
--- Version du serveur :  10.4.14-MariaDB
--- Version de PHP : 7.4.11
+-- Host: localhost:8889
+-- Generation Time: Aug 03, 2022 at 10:01 AM
+-- Server version: 5.7.34
+-- PHP Version: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,15 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `spotify_db`
+-- Database: `buProject`
 --
-CREATE DATABASE IF NOT EXISTS `spotify_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `spotify_db`;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `artists`
+-- Table structure for table `artists`
 --
 
 CREATE TABLE `artists` (
@@ -38,7 +36,7 @@ CREATE TABLE `artists` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `artists`
+-- Dumping data for table `artists`
 --
 
 INSERT INTO `artists` (`id`, `name`, `bio`, `gender`, `birth_year`) VALUES
@@ -49,7 +47,7 @@ INSERT INTO `artists` (`id`, `name`, `bio`, `gender`, `birth_year`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -58,7 +56,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `title`) VALUES
@@ -70,7 +68,7 @@ INSERT INTO `categories` (`id`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `playlists`
+-- Table structure for table `playlists`
 --
 
 CREATE TABLE `playlists` (
@@ -80,10 +78,21 @@ CREATE TABLE `playlists` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `playlists`
+--
+
+INSERT INTO `playlists` (`id`, `title`, `creation_date`, `user_id`) VALUES
+(1, 'jack list', '2022-08-01', 1),
+(2, 'list no', '2018-08-14', 2),
+(3, 'haha', '2022-06-07', 3),
+(4, 'whenLIst', '2020-08-05', 4),
+(5, 'cool', '2022-07-01', 1);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `playlist_content`
+-- Table structure for table `playlist_content`
 --
 
 CREATE TABLE `playlist_content` (
@@ -91,10 +100,27 @@ CREATE TABLE `playlist_content` (
   `song_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `playlist_content`
+--
+
+INSERT INTO `playlist_content` (`playlist_id`, `song_id`) VALUES
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(2, 2),
+(4, 2),
+(5, 2),
+(1, 3),
+(3, 3),
+(4, 3),
+(5, 3);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `songs`
+-- Table structure for table `songs`
 --
 
 CREATE TABLE `songs` (
@@ -107,7 +133,7 @@ CREATE TABLE `songs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `songs`
+-- Dumping data for table `songs`
 --
 
 INSERT INTO `songs` (`id`, `title`, `release_date`, `poster`, `artist_id`, `categ_id`) VALUES
@@ -118,7 +144,7 @@ INSERT INTO `songs` (`id`, `title`, `release_date`, `poster`, `artist_id`, `cate
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -129,37 +155,47 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Index pour les tables déchargées
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES
+(1, 'jack', 'jack@gmail.com', '111111'),
+(2, 'amin', 'amin@gmail.com', '11111111'),
+(3, 'margo', 'margo@gmail.com', '11111111'),
+(4, 'seif', 'seif@gmail.com', '11111111');
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `artists`
+-- Indexes for table `artists`
 --
 ALTER TABLE `artists`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `playlists`
+-- Indexes for table `playlists`
 --
 ALTER TABLE `playlists`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Index pour la table `playlist_content`
+-- Indexes for table `playlist_content`
 --
 ALTER TABLE `playlist_content`
   ADD PRIMARY KEY (`playlist_id`,`song_id`),
   ADD KEY `song_id` (`song_id`);
 
 --
--- Index pour la table `songs`
+-- Indexes for table `songs`
 --
 ALTER TABLE `songs`
   ADD PRIMARY KEY (`id`),
@@ -167,64 +203,64 @@ ALTER TABLE `songs`
   ADD KEY `artist_id` (`artist_id`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `artists`
+-- AUTO_INCREMENT for table `artists`
 --
 ALTER TABLE `artists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `categories`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pour la table `playlists`
+-- AUTO_INCREMENT for table `playlists`
 --
 ALTER TABLE `playlists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT pour la table `songs`
+-- AUTO_INCREMENT for table `songs`
 --
 ALTER TABLE `songs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `playlists`
+-- Constraints for table `playlists`
 --
 ALTER TABLE `playlists`
   ADD CONSTRAINT `playlists_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Contraintes pour la table `playlist_content`
+-- Constraints for table `playlist_content`
 --
 ALTER TABLE `playlist_content`
   ADD CONSTRAINT `playlist_content_ibfk_1` FOREIGN KEY (`playlist_id`) REFERENCES `playlists` (`id`),
   ADD CONSTRAINT `playlist_content_ibfk_2` FOREIGN KEY (`song_id`) REFERENCES `songs` (`id`);
 
 --
--- Contraintes pour la table `songs`
+-- Constraints for table `songs`
 --
 ALTER TABLE `songs`
   ADD CONSTRAINT `songs_ibfk_2` FOREIGN KEY (`categ_id`) REFERENCES `categories` (`id`),
